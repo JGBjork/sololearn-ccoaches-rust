@@ -13,11 +13,24 @@
 
 #[allow(dead_code)]
 pub fn military_time(params: &str) -> String {
-    String::from("not implemented yet")
+    let (time,time_of_day) = params.split_once(' ').unwrap();
+    let (hour, minutes) = time.split_once(':').unwrap();
+    match (hour.parse::<u32>(), minutes.parse::<u32>()) {
+        (Ok(mut h), Ok(m)) => {
+            h %= 12;
+            if time_of_day == "PM" { h += 12; }
+            format!("{:02}:{:02}", h, m)
+        },
+        _ => String::from("Error")
+    }
 }
 
 #[test]
 pub fn military_time_test() {
     assert_eq!(military_time("11:00 AM"), "11:00");
     assert_eq!(military_time("11:00 PM"), "23:00");
+    assert_eq!(military_time("12:00 AM"), "00:00");
+    assert_eq!(military_time("12:00 PM"), "12:00");
+    assert_eq!(military_time("1:05 AM"), "01:05");
+    assert_eq!(military_time("1:05 PM"), "13:05");
 }
