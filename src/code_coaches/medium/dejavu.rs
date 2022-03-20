@@ -16,10 +16,7 @@ use std::collections::HashSet;
 
 #[allow(dead_code)]
 pub fn deja_vu(params: &str) -> String {
-    let mut hs = HashSet::new();
-    for c in params.chars() {
-        hs.insert(c);
-    }
+    let hs = params.chars().collect::<HashSet<char>>();
 
     if hs.len() == params.len() {
         "Unique".to_string()
