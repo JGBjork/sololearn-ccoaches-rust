@@ -4,3 +4,4 @@ mod popsicles;
 mod zip_code_validator;
 mod ballpark_orders;
 mod isogram_detector;
+mod jungle_camping;
